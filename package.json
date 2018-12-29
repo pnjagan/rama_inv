@@ -1,0 +1,32 @@
+{
+  "name": "rama_inv",
+  "version": "1.0.0",
+  "description": "simple invoicing app based on whirls invoice app",
+  "main": "server.js",
+  "scripts": {
+    "test1": "nyc mocha --timeout 10000 --exit",
+    "test2": "mocha || true",
+    "test": "nyc --reporter=html mocha --timeout 10000 --exit  ./test/**",
+    "start": "export NODE_ENV=dev&& nodemon ./src/server.js",
+    "lint": "./node_modules/.bin/eslint src/**"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "config": "^3.0.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.0",
+    "morgan": "^1.9.1",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai-http": "^4.2.0",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  }
+}

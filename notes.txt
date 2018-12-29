@@ -1,0 +1,13 @@
+
+//i am of the thinking that assert can be part of the Code
+
+//npm i express body-parser mongoose morgan config chai --save
+
+//npm i mocha chai-http nyc --save-dev
+
+1.understanding the usage of winston logging - integrate with express error handling and morgon - done
+2.error handling in express and utilzing loggign for that - done
+3.keep seperate log for common and performance - not needed
+4.what is async keyword - used in soo many places in express... -
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
