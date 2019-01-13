@@ -9,6 +9,9 @@ const config = require('config'); // we load the db location from the JSON files
 
 const itemRouter = require('./routes/item');
 const userRouter = require('./routes/user');
+const customerRouter = require('./routes/customer');
+const addressRouter = require('./routes/address');
+
 const winston = require('../config/winston');
 
 const log = winston.debug;
@@ -125,6 +128,9 @@ errLog('logging an error');
 
 app.use('/item', itemRouter);
 app.use('/user', userRouter);
+app.use('/customer', customerRouter);
+app.use('/address', addressRouter);
+
 
 /* ************end ROUTERS ***************** */
 

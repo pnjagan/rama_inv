@@ -1,4 +1,7 @@
 
+
+
+-----------------------------------
 //i am of the thinking that assert can be part of the Code
 
 //npm i express body-parser mongoose morgan config chai --save
@@ -11,3 +14,73 @@
 4.what is async keyword - used in soo many places in express... -
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+
+Scope
+----------
+Build a full fledged MongoDB based RestAPI for use in web or mobile and in the process cover most common application development scenarios.
+
+Unit test Vs Integration tests
+------------------------------
+https://www.youtube.com/watch?v=vqAaMVoKz1c
+
+
+
+https://www.youtube.com/watch?v=Kk6Er0c7srU&t=429s -- MongoDB aggregation
+
+https://www.youtube.com/watch?v=A3jvoE0jGdE&list=PLWkguCWKqN9OwcbdYm4nUIXnA2IoXX0LI -- aggregate
+
+https://www.youtube.com/watch?v=J_L6r_v3hss -- aggregate
+
+db.marks.insert(
+{
+student: "jagan",
+subject: "maths",
+marks: 65
+});
+
+
+db.marks.insert(
+{
+student: "jagan",
+subject: "science",
+marks: 90
+});
+
+db.marks.insert(
+{
+student: "jagan",
+subject: "social",
+marks: 70
+});
+
+db.marks.insert(
+{
+student: "raman",
+subject: "maths",
+marks: 87
+});
+
+db.marks.insert(
+{
+student: "raman",
+subject: "science",
+marks: 88
+});
+
+db.marks.insert(
+{
+student: "raman",
+subject: "social",
+marks: 70
+});
+----------------------------------------
+
+db.marks.aggregate([
+  {$match: {}},
+  {$group: {_id: "$student", total_marks: {$sum: "$marks"}}}
+]);
+
+db.marks.aggregate([
+  {$match: {}},
+  {$group: {_id: "$subject", total_marks: {$sum: "$marks"}}}
+]);
