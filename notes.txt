@@ -1,5 +1,11 @@
+1.
+https://atom.io/packages/node-debugger
+// at the end of the day, you need to know how to use a debugger
 
-
+2.
+Invoice test case differed as it involves creating item and customers first....
+we need to refer the models in before part of the test case and create the test data
+hence holding it off and planning to proceed to reactJS
 
 -----------------------------------
 //i am of the thinking that assert can be part of the Code

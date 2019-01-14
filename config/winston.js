@@ -1,5 +1,9 @@
 const path = require('path');
 const winston = require('winston');
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+// we can use JSON stingify to consistently a printed object
+
 /*
 {
   error: 0,
@@ -52,6 +56,9 @@ const {
   printf,
 } = format;
 
+// this function can be expanded to anything we want with info.message
+// or alternatively we can wrap all this in custom log method that inspects
+// and converts objects to JSON before passing to this logger
 const myFormat = printf(info => `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`);
 
 

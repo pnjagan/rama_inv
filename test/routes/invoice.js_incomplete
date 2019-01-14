@@ -1,0 +1,384 @@
+process.env.NODE_ENV = 'test';
+// const mongoose = require("mongoose");
+
+/* eslint max-len: 0 */
+
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const serverMod = require('../../src/server');
+const { Invoice, InvoiceLine } = require('../../src/models/invoice');
+
+// const { Customer, Address } = require('../../src/models/customer');
+
+const { log, errLog } = require('../../src/common/utils');
+
+const { app } = serverMod;
+const { assert } = chai;
+
+// const request = chai.request(app);
+
+chai.use(chaiHttp);
+
+describe('Invoice testing', () => {
+  // BEFORE deletes
+  before(async () => {
+    // Before each test we empty the database
+    try {
+      const delInv =  Invoice.deleteMany({});
+      const delInvLine =  InvoiceLine.deleteMany({});
+
+      // const delCust =  Customer.deleteMany({});
+      // const delAdd =  Address.deleteMany({});
+      // , delCust, delAdd
+      await Promise.all([delInv, delInvLine]);
+      // done();
+    } catch (error) {
+      log('ERROR - unable to delete all the inv and lines');
+      log(error.stack);
+      throw new Error(error);
+    }
+  });
+
+  /*
+  * Test the /GET route
+  */
+  it('GET /invoice : get all invoices', (done) => {
+    chai.request(app)
+      .get('/invoice')
+      .end((err, res) => {
+        log('GET /invoice testing');
+        assert.equal(res.status, 200);
+        assert.isArray(res.body);
+        assert.lengthOf(res.body, 0);
+        done();
+      });
+  });
+
+  const invoice1 =
+  {
+    invoiceNumber        : 'INV001',
+    invoiceDate          : '2019-01-10',
+    customerId           : '5c3b2d3e3f89401de81f53de',
+    invoiceIssueDate     : '2019-01-10',
+    goodsShippedDate     : '2019-01-10',
+    shipMode             : 'CUSTOMER_MANAGED',
+    shipper              : '',
+    shipperReference     : '',
+    lineTotal            : 100,
+    taxTotal             : 0,
+    frieghtTotal         : 0,
+    otherCharges         : 0,
+    invoiceAmount        : 100,
+    invoiceStatus        : 'NEW',
+    custPONum            : 'CUSTPO#001',
+    custPODate           : '2019-01-10',
+    custTaxRef           : 'TAXREF#01',
+    custBillingAddressId : '5c3b2d3e3f89401de81f53dc',
+    custShippingAddressId: '5c3b2d3e3f89401de81f53dd',
+    invoiceLines         : [
+      {
+        lineNumber     : 1,
+        itemCode       : 'P001',
+        itemDesc       : 'Rama Item',
+        itemId         : '5c1a72543afff70fe9017aeb',
+        invoicedQty    : 10,
+        price          : 5,
+        packingDetails : 'NA',
+        lineAmount     : 50,
+        lineType       : 'ITEM',
+        taxRate        : 0,
+        taxAmount      : 0,
+        frieghtAmount  : 0,
+        otherCharges   : 0,
+        additionalNotes: 'send this item fast',
+        cancelledFlag  : 'N',
+      },
+      {
+        lineNumber     : 2,
+        itemCode       : 'P002',
+        itemDesc       : 'Krishna Item',
+        itemId         : '5c1e0310b559951f0e9a7248',
+        invoicedQty    : 10,
+        price          : 5,
+        packingDetails : 'NA',
+        lineAmount     : 50,
+        lineType       : 'ITEM',
+        taxRate        : 0,
+        taxAmount      : 0,
+        frieghtAmount  : 0,
+        otherCharges   : 0,
+        additionalNotes: 'send this item safe',
+        cancelledFlag  : 'N',
+      },
+    ],
+    cancelledFlag: 'N',
+  };
+
+  const invoice2 =
+  {
+    invoiceNumber        : 'INV001',
+    invoiceDate          : '2019-01-10',
+    customerId           : '5c3b2d3e3f89401de81f53de',
+    invoiceIssueDate     : '2019-01-10',
+    goodsShippedDate     : '2019-01-10',
+    shipMode             : 'CUSTOMER_MANAGED',
+    shipper              : '',
+    shipperReference     : '',
+    lineTotal            : 100,
+    taxTotal             : 0,
+    frieghtTotal         : 0,
+    otherCharges         : 0,
+    invoiceAmount        : 100,
+    invoiceStatus        : 'NEW',
+    custPONum            : 'CUSTPO#001',
+    custPODate           : '2019-01-10',
+    custTaxRef           : 'TAXREF#01',
+    custBillingAddressId : '5c3b2d3e3f89401de81f53dc',
+    custShippingAddressId: '5c3b2d3e3f89401de81f53dd',
+    invoiceLines         : [
+      {
+        lineNumber     : 1,
+        itemCode       : 'P001',
+        itemDesc       : 'Rama Item',
+        itemId         : '5c1a72543afff70fe9017aeb',
+        invoicedQty    : 10,
+        price          : 5,
+        packingDetails : 'NA',
+        lineAmount     : 50,
+        lineType       : 'ITEM',
+        taxRate        : 0,
+        taxAmount      : 0,
+        frieghtAmount  : 0,
+        otherCharges   : 0,
+        additionalNotes: 'send this item fast',
+        cancelledFlag  : 'N',
+      },
+      {
+        lineNumber     : 2,
+        itemCode       : 'P002',
+        itemDesc       : 'Krishna Item',
+        itemId         : '5c1e0310b559951f0e9a7248',
+        invoicedQty    : 10,
+        price          : 5,
+        packingDetails : 'NA',
+        lineAmount     : 50,
+        lineType       : 'ITEM',
+        taxRate        : 0,
+        taxAmount      : 0,
+        frieghtAmount  : 0,
+        otherCharges   : 0,
+        additionalNotes: 'send this item safe',
+        cancelledFlag  : 'N',
+      },
+      {
+        lineNumber     : 3,
+        itemCode       : 'P002',
+        itemDesc       : 'Krishna Item',
+        itemId         : '5c1e0310b559951f0e9a7248',
+        invoicedQty    : 10,
+        price          : 5,
+        packingDetails : 'NA',
+        lineAmount     : 50,
+        lineType       : 'ITEM',
+        taxRate        : 0,
+        taxAmount      : 0,
+        frieghtAmount  : 0,
+        otherCharges   : 0,
+        additionalNotes: 'send this item safe',
+        cancelledFlag  : 'N',
+      },
+    ],
+    cancelledFlag: 'N',
+  };
+
+
+  it('POST /customer/add', async () => {
+    let result = null;
+    // add 1st item
+    try {
+      result = await chai.request(app)
+        .post('/customer/add')
+        .send(customer1);
+
+      assert.equal(result.status, 200);
+      assert.property(result.body.result, '_id');
+      assert.equal(result.body.result.customerName, 'Test: Customer 0010');
+      assert.equal(result.body.result.customerNumber, '0010');
+      // done();
+
+
+      result = await chai.request(app)
+        .post('/customer/add')
+        .send(customer2);
+
+      assert.equal(result.status, 200);
+      assert.property(result.body.result, '_id');
+      assert.equal(result.body.result.customerName, 'Test: Customer 0020');
+      assert.equal(result.body.result.customerNumber, '0020');
+
+
+      // fetching the 2 customers
+      result = await chai.request(app)
+        .get('/customer');
+      assert.equal(result.status, 200);
+      assert.isArray(result.body);
+      assert.lengthOf(result.body, 2);
+
+      // update IDs - this is required for update and then validation
+      for (let i = 0; i < result.body.length; i++) {
+        if (result.body[i].customerNumber === '0010') {
+          customer1._id = result.body[i]._id;
+
+          for (let j = 0; j < result.body[i].addresses.length; j++) {
+            if (result.body[i].addresses[j].contactName === 'Manager1') {
+              customer1.addresses[0]._id = result.body[i].addresses[j]._id;
+            }
+            if (result.body[i].addresses[j].contactName === 'Manager2') {
+              customer1.addresses[1]._id = result.body[i].addresses[j]._id;
+            }
+          }
+        }
+      }
+
+      // done();
+      // since passing async method to it-method , its returning a promise
+      // i cannot call done and return a Promise , i can do only 1
+      // so not calling done();
+    } catch (error) {
+      log(error.stack);
+      errLog(error.stack);
+      // not calling done(error), see reason above
+      throw new Error('failed in creating 2 new customers');
+    }
+  });
+
+  /*
+    prom3.then(
+      (res) => {
+        log(`Deleting the 1st of 2 user - ${res}`);
+        chai.request(app)
+          .delete('/user/delete')
+          .send({ _id: res.userId })
+          .end((err, getRes) => {
+            if (err) {
+              done(new Error(`deleting user ID ${res.userId} failed : ${err}`));
+            }
+            assert.equal(getRes.status, 200);
+            assert.equal(getRes.body.message, 'User successfully deleted!');
+            done();
+          });
+      },
+      (rej) => {
+        done(new Error(rej));
+      },
+    );
+  });
+*/
+
+  // it('POST /user/add : update customer', async (done) => {
+  it('POST /customer/update : update customer', async () => {
+    let result = null;
+    // console.log(`customer1._id : ${customer1._id}`);
+
+    try {
+      customer1.customerName     =  'Test: Customer 0010 - v2';
+      customer1.customerCategory =  'SMALL RETAIL CUSTOMER - v2';
+
+      // replacing bill to with ship to and adding new address for ship to
+      customer1.primaryBillToAddress = 'UNSAVED-REF-1';
+      customer1.primaryShipToAddress = customer1.addresses[0]._id;
+
+      // modifying 1st address
+      // modifying existing bill to value
+
+      customer1.addresses[0].contactEmail  = 'govindan@vishnupuja.com';
+      customer1.addresses[0].addressLine1  = 'NO 8, sundararajan street -v2';
+      customer1.addresses[0].addressLine2  = 'krishna nagar v2';
+      customer1.addresses[0].addressLine3  = '';
+      customer1.addresses[0].placeName     = 'padmanabapuram II';
+
+      // replacing the 2nd address
+      customer1.addresses[1].enabledFlag   = 'Y';
+      customer1.addresses[1]._id           = 'UNSAVED-REF-1';
+      customer1.addresses[1].addressType   = 'BILL_TO';
+      customer1.addresses[1].contactName   = 'Manager3';
+      // customer1.addreses[0].contactPhone": "",
+      customer1.addresses[1].contactEmail  = 'nandagopal@vrajapriya.com';
+      customer1.addresses[1].addressLine1  = 'NO 98, aranganayagan street';
+      customer1.addresses[1].addressLine2  = 'pallikondan nagar';
+      // customer1.addreses[0].addressLine3":
+      customer1.addresses[1].placeName     = 'thirukannapuram';
+      customer1.addresses[1].state         = 'tamil nadu';
+      customer1.addresses[1].country       = 'india';
+      customer1.addresses[1].zipCode       = '608676';
+
+      log('-----update customer-----');
+      log(customer1);
+      result = await chai.request(app)
+        .put('/customer/update')
+        .send(customer1);
+      log('-----result customer-----');
+      log(result.body);
+
+      assert.equal(result.status, 200);
+
+      // console.log('--update result--');
+      // console.log(result);
+      errLog(result);
+
+      assert.equal(result.body.message, 'customer successfully updated!');
+
+      assert.equal(result.body.retDoc.customerName, 'Test: Customer 0010 - v2');
+      assert.equal(result.body.retDoc.customerCategory, 'SMALL RETAIL CUSTOMER - v2');
+
+      // validating the update
+
+      result = await chai.request(app)
+        .get(`/customer/get/${customer1._id}`);
+
+      assert.equal(result.status, 200);
+
+      // console.log(result);
+
+      assert.equal(result.body.result.customerName, 'Test: Customer 0010 - v2');
+      assert.equal(result.body.result.customerCategory, 'SMALL RETAIL CUSTOMER - v2');
+      assert.lengthOf(result.body.result.addresses, 3);
+
+      assert.equal(result.body.result.primaryShipToAddress, customer1.addresses[0]._id);
+
+      assert.equal(result.body.result.primaryBillToAddress,
+        result.body.result.addresses.filter(a => a.contactName === 'Manager3')[0]._id);
+
+      assert.equal(
+        result.body.result.addresses.filter(a => a.contactName === 'Manager3')[0].contactEmail,
+        'nandagopal@vrajapriya.com',
+      );
+
+      assert.equal(
+        result.body.result.addresses.filter(a => a.contactName === 'Manager2')[0].contactEmail,
+        'madhavan@vishnupuja.com',
+      );
+
+      assert.equal(
+        result.body.result.addresses.filter(a => a.contactName === 'Manager1')[0].contactEmail,
+        'govindan@vishnupuja.com',
+      );
+
+      // done();
+      // async method returns a promise, so no done()
+    } catch (error) {
+      log(error.stack);
+      errLog(error.stack);
+      throw new Error('failed in updating customer');
+    }
+  });
+
+  // after(() => server_mod.stop());
+  after((done) => {
+    // console.log(' Exec after code')
+    // server_mod.stop()
+    chai.request(app).close();
+    done();
+  });
+});
+// end of items describe

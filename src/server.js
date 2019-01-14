@@ -11,6 +11,7 @@ const itemRouter = require('./routes/item');
 const userRouter = require('./routes/user');
 const customerRouter = require('./routes/customer');
 const addressRouter = require('./routes/address');
+const invoiceRouter = require('./routes/invoice');
 
 const winston = require('../config/winston');
 
@@ -130,7 +131,7 @@ app.use('/item', itemRouter);
 app.use('/user', userRouter);
 app.use('/customer', customerRouter);
 app.use('/address', addressRouter);
-
+app.use('/invoice', invoiceRouter);
 
 /* ************end ROUTERS ***************** */
 

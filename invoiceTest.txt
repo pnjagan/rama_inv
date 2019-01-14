@@ -1,0 +1,277 @@
+===================INVOICE CREATE DOC==================
+{
+  "invoiceNumber"        : "INV001",
+  "invoiceDate"          : "2019-01-10",
+  "customerId"           : "5c3b2d3e3f89401de81f53de",
+  "invoiceIssueDate"     : "2019-01-10",
+  "goodsShippedDate"     : "2019-01-10",
+  "shipMode"             : "CUSTOMER_MANAGED",
+  "shipper"              : "",
+  "shipperReference"     : "",
+  "lineTotal"            : 100,
+  "taxTotal"             : 0,
+  "frieghtTotal"         : 0,
+  "otherCharges"         : 0,
+  "invoiceAmount"        : 100,
+  "invoiceStatus"        : "NEW",
+  "custPONum"            : "CUSTPO#001",
+  "custPODate"           : "2019-01-10",
+  "custTaxRef"           : "TAXREF#01",
+  "custBillingAddressId" : "5c3b2d3e3f89401de81f53dc",
+  "custShippingAddressId": "5c3b2d3e3f89401de81f53dd",
+  "invoiceLines"         : [
+    {
+      "lineNumber"     : 1,
+      "itemCode"       : "P001",
+      "itemDesc"       : "Rama Item",
+      "itemId"         : "5c1a72543afff70fe9017aeb",
+      "invoicedQty"    : 10,
+      "price"          : 5,
+      "packingDetails" : "NA",
+      "lineAmount"     : 50,
+      "lineType"       : "ITEM",
+      "taxRate"        : 0,
+      "taxAmount"      : 0,
+      "frieghtAmount"  : 0,
+      "otherCharges"   : 0,
+      "additionalNotes": "send this item fast",
+      "cancelledFlag"  : "N"
+    },
+    {
+      "lineNumber"     : 2,
+      "itemCode"       : "P002",
+      "itemDesc"       : "Krishna Item",
+      "itemId"         : "5c1e0310b559951f0e9a7248",
+      "invoicedQty"    : 10,
+      "price"          : 5,
+      "packingDetails" : "NA",
+      "lineAmount"     : 50,
+      "lineType"       : "ITEM",
+      "taxRate"        : 0,
+      "taxAmount"      : 0,
+      "frieghtAmount"  : 0,
+      "otherCharges"   : 0,
+      "additionalNotes": "send this item safe",
+      "cancelledFlag"  : "N"
+    }
+  ],
+  "cancelledFlag"        : "N"
+}
+================INVOICE CREATE DOC=========================
+
+================INVOICE UPDATE DOC==================
+
+------------------------------------------------------
+{
+  "invoiceNumber"        : "INV001",
+  "_id"                  : "5c3b4cb0d49a4428be97ef56",
+  "invoiceDate"          : "2019-01-10",
+  "customerId"           : "5c3b51aa3ca7952940b07aac",
+  "goodsShippedDate"     : "2019-01-08",
+  "lineTotal"            : 120,
+  "custPONum"            : "CUSTPO#002",
+  "custBillingAddressId" : "5c3b51aa3ca7952940b07aaa",
+  "custShippingAddressId": "5c3b51aa3ca7952940b07aab",
+  "invoiceLines"         : [
+    {
+      "lineNumber"     : 1,
+      "_id"            : "5c3b4cb0d49a4428be97ef54",
+      "itemCode"       : "P001",
+      "itemDesc"       : "Rama Item",
+      "itemId"         : "5c1a72543afff70fe9017aeb",
+      "invoicedQty"    : 11,
+      "price"          : 5,
+      "lineAmount"     : 55,
+      "additionalNotes": "send this item fast"
+    },
+    {
+      "lineNumber"     : 2,
+      "_id"            : "5c3b4cb0d49a4428be97ef55",
+      "itemCode"       : "P004",
+      "itemDesc"       : "Krishna Item",
+      "itemId"         : "5c1e0373694e621f5aaf0428",
+      "invoicedQty"    : 11,
+      "price"          : 5,
+      "lineAmount"     : 55,
+      "additionalNotes": "send this item safe"
+    },
+    {
+      "lineNumber"     : 3,
+      "_id"            : "UNSAVED-REF-1",
+      "itemCode"       : "P003",
+      "itemDesc"       : "Krishna Item",
+      "itemId"         : "5c1e034052b8231f28f45fa6",
+      "invoicedQty"    : 10,
+      "price"          : 1,
+      "lineAmount"     : 10,
+      "additionalNotes": "send this item safe"
+    }
+  ]
+}
+================INVOICE UPDATE DOC=========================
+
+
+=================Mongo DUMP=======================================
+/* 1 */
+{
+    "_id" : ObjectId("5c3b4cb0d49a4428be97ef56"),
+    "shipMode" : "CUSTOMER_MANAGED",
+    "invoiceStatus" : "NEW",
+    "invoiceLines" : [
+        ObjectId("5c3b4cb0d49a4428be97ef54"),
+        ObjectId("5c3b4cb0d49a4428be97ef55")
+    ],
+    "cancelledFlag" : "N",
+    "invoiceNumber" : "INV001",
+    "invoiceDate" : ISODate("2019-01-10T00:00:00.000Z"),
+    "customerId" : ObjectId("5c3b2d3e3f89401de81f53de"),
+    "invoiceIssueDate" : ISODate("2019-01-10T00:00:00.000Z"),
+    "goodsShippedDate" : ISODate("2019-01-10T00:00:00.000Z"),
+    "shipper" : "",
+    "shipperReference" : "",
+    "lineTotal" : 100,
+    "taxTotal" : 0,
+    "frieghtTotal" : 0,
+    "otherCharges" : 0,
+    "invoiceAmount" : 100,
+    "custPONum" : "CUSTPO#001",
+    "custPODate" : "2019-01-10",
+    "custTaxRef" : "TAXREF#01",
+    "custBillingAddressId" : ObjectId("5c3b2d3e3f89401de81f53dc"),
+    "custShippingAddressId" : ObjectId("5c3b2d3e3f89401de81f53dd"),
+    "createdAt" : ISODate("2019-01-13T14:35:28.404Z"),
+    "__v" : 0
+}
+==========================================================================
+/* 1 */
+{
+    "_id" : ObjectId("5c3b4c19bc9bb3286129be07"),
+    "unitOfMeasure" : "NOS",
+    "lineType" : "ITEM",
+    "cancelledFlag" : "N",
+    "lineNumber" : 2,
+    "itemCode" : "P002",
+    "itemDesc" : "Krishna Item",
+    "itemId" : ObjectId("5c1e0310b559951f0e9a7248"),
+    "invoicedQty" : 10,
+    "price" : 5,
+    "packingDetails" : "NA",
+    "lineAmount" : 50,
+    "taxRate" : 0,
+    "taxAmount" : 0,
+    "frieghtAmount" : 0,
+    "otherCharges" : 0,
+    "additionalNotes" : "send this item safe",
+    "__v" : 0
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("5c3b4c19bc9bb3286129be06"),
+    "unitOfMeasure" : "NOS",
+    "lineType" : "ITEM",
+    "cancelledFlag" : "N",
+    "lineNumber" : 1,
+    "itemCode" : "P001",
+    "itemDesc" : "Rama Item",
+    "itemId" : ObjectId("5c1a72543afff70fe9017aeb"),
+    "invoicedQty" : 10,
+    "price" : 5,
+    "packingDetails" : "NA",
+    "lineAmount" : 50,
+    "taxRate" : 0,
+    "taxAmount" : 0,
+    "frieghtAmount" : 0,
+    "otherCharges" : 0,
+    "additionalNotes" : "send this item fast",
+    "__v" : 0
+}
+
+/* 3 */
+{
+    "_id" : ObjectId("5c3b4c38bc9bb3286129be08"),
+    "unitOfMeasure" : "NOS",
+    "lineType" : "ITEM",
+    "cancelledFlag" : "N",
+    "lineNumber" : 1,
+    "itemCode" : "P001",
+    "itemDesc" : "Rama Item",
+    "itemId" : ObjectId("5c1a72543afff70fe9017aeb"),
+    "invoicedQty" : 10,
+    "price" : 5,
+    "packingDetails" : "NA",
+    "lineAmount" : 50,
+    "taxRate" : 0,
+    "taxAmount" : 0,
+    "frieghtAmount" : 0,
+    "otherCharges" : 0,
+    "additionalNotes" : "send this item fast",
+    "__v" : 0
+}
+
+/* 4 */
+{
+    "_id" : ObjectId("5c3b4c38bc9bb3286129be09"),
+    "unitOfMeasure" : "NOS",
+    "lineType" : "ITEM",
+    "cancelledFlag" : "N",
+    "lineNumber" : 2,
+    "itemCode" : "P002",
+    "itemDesc" : "Krishna Item",
+    "itemId" : ObjectId("5c1e0310b559951f0e9a7248"),
+    "invoicedQty" : 10,
+    "price" : 5,
+    "packingDetails" : "NA",
+    "lineAmount" : 50,
+    "taxRate" : 0,
+    "taxAmount" : 0,
+    "frieghtAmount" : 0,
+    "otherCharges" : 0,
+    "additionalNotes" : "send this item safe",
+    "__v" : 0
+}
+
+/* 5 */
+{
+    "_id" : ObjectId("5c3b4cb0d49a4428be97ef54"),
+    "unitOfMeasure" : "NOS",
+    "lineType" : "ITEM",
+    "cancelledFlag" : "N",
+    "lineNumber" : 1,
+    "itemCode" : "P001",
+    "itemDesc" : "Rama Item",
+    "itemId" : ObjectId("5c1a72543afff70fe9017aeb"),
+    "invoicedQty" : 10,
+    "price" : 5,
+    "packingDetails" : "NA",
+    "lineAmount" : 50,
+    "taxRate" : 0,
+    "taxAmount" : 0,
+    "frieghtAmount" : 0,
+    "otherCharges" : 0,
+    "additionalNotes" : "send this item fast",
+    "__v" : 0
+}
+
+/* 6 */
+{
+    "_id" : ObjectId("5c3b4cb0d49a4428be97ef55"),
+    "unitOfMeasure" : "NOS",
+    "lineType" : "ITEM",
+    "cancelledFlag" : "N",
+    "lineNumber" : 2,
+    "itemCode" : "P002",
+    "itemDesc" : "Krishna Item",
+    "itemId" : ObjectId("5c1e0310b559951f0e9a7248"),
+    "invoicedQty" : 10,
+    "price" : 5,
+    "packingDetails" : "NA",
+    "lineAmount" : 50,
+    "taxRate" : 0,
+    "taxAmount" : 0,
+    "frieghtAmount" : 0,
+    "otherCharges" : 0,
+    "additionalNotes" : "send this item safe",
+    "__v" : 0
+}
+==================================================================================
