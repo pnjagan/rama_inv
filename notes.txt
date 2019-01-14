@@ -7,6 +7,15 @@ Invoice test case differed as it involves creating item and customers first....
 we need to refer the models in before part of the test case and create the test data
 hence holding it off and planning to proceed to reactJS
 
+3.tips on git
+https://mislav.net/2010/07/git-tips/
+
+as of now
+
+git status
+git add -A
+git commit -m "..."
+git push origin master
 -----------------------------------
 //i am of the thinking that assert can be part of the Code
 
